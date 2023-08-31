@@ -1,0 +1,6 @@
+.icon {
+    position: absolute;
+    user-select: none;
+    cursor: grab;
+    font-size: 20px;
+}
