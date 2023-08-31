@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Draggable from 'react-draggable';
 import './App.css';
 
-function Layout() {
-    const maxX = 500;
-    const maxY = 500;
+function Layout({ width, height, data }) {
+    const myref = useRef();
+    const [maxX, setMaxX] = useState(width);
+    const [maxY, setMaxY] = useState(height);
+
     const [initialState, setInitialState] = useState({
         x: maxX / 2,
         y: maxY / 2,
@@ -18,8 +20,11 @@ function Layout() {
 
     const handleDrag = (e) => {
         setInitialState({
-            x: e.x > 500 ? 500 : e.x,
-            y: e.y > 500 ? 500 : e.y,
+            x:
+                e.x - myref?.current?.offsetLeft > width
+                    ? myref?.current?.offsetLeft + width
+                    : Math.abs(e.x - myref?.current?.offsetLeft),
+            y: e.y - myref?.current?.offsetTop > height ? height : Math.abs(e.y - myref?.current?.offsetTop),
         });
     };
 
@@ -29,43 +34,48 @@ function Layout() {
         alignItems: 'center',
     };
 
+    useEffect(() => {
+        if (myref?.current?.offsetLeft) setMaxX(myref?.current?.offsetLeft + width);
+        if (myref?.current?.offsetTop) setMaxY(myref?.current?.offsetTop + height);
+    }, []);
+
     return (
-        <div style={{ position: 'relative', width: '500px', height: '500px' }}>
+        <div style={{ position: 'relative', width: width, height: height }} ref={myref}>
             <div style={{ display: 'flex' }}>
                 <div style={{ width: initialState.x, height: initialState.y, backgroundColor: 'yellow', ...alignCenter }}>
-                    Cell 1
+                    {data.cell1}
                 </div>
                 <div
                     style={{
-                        width: Math.abs(500 - initialState.x),
+                        width: Math.abs(width - initialState.x),
                         height: initialState.y,
                         backgroundColor: 'pink',
                         ...alignCenter,
                     }}
                 >
-                    Cell 2
+                    {data.cell2}
                 </div>
             </div>
             <div style={{ display: 'flex' }}>
                 <div
                     style={{
                         width: initialState.x,
-                        height: Math.abs(500 - initialState.y),
+                        height: Math.abs(height - initialState.y),
                         backgroundColor: 'red',
                         ...alignCenter,
                     }}
                 >
-                    Cell 3
+                    {data.cell3}
                 </div>
                 <div
                     style={{
-                        width: Math.abs(initialState.x - 500),
-                        height: Math.abs(initialState.y - 500),
+                        width: Math.abs(initialState.x - width),
+                        height: Math.abs(initialState.y - height),
                         backgroundColor: 'blue',
                         ...alignCenter,
                     }}
                 >
-                    Cell 4
+                    {data.cell4}
                 </div>
             </div>
             <div
@@ -77,7 +87,15 @@ function Layout() {
                     ...plusStyle,
                 }}
             >
-                <Draggable onDrag={handleDrag}>
+                <Draggable
+                    onDrag={handleDrag}
+                    bounds={{
+                        top: -height / 2,
+                        left: -width / 2,
+                        right: width / 2,
+                        bottom: height / 2,
+                    }}
+                >
                     <div>+</div>
                 </Draggable>
             </div>
