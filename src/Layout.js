@@ -60,118 +60,176 @@ function Layout({ width, height, inputs, setInputs }) {
         }));
     };
 
+    const box1Area = (((initialState.x * initialState.y) / (width * height)) * 100).toFixed(2);
+    const box2Area = (((Math.abs(width - initialState.x) * initialState.y) / (width * height)) * 100).toFixed(2);
+    const box3Area = (((initialState.x * Math.abs(initialState.y - height)) / (width * height)) * 100).toFixed(2);
+    const box4Area = (
+        ((Math.abs(initialState.x - width) * Math.abs(initialState.y - height)) / (width * height)) *
+        100
+    ).toFixed(2);
+
     return (
         <>
-            <div style={{ position: 'relative', width: width, height: height }} ref={myref}>
-                <div style={{ display: 'flex' }}>
-                    <div
-                        style={{ width: initialState.x, height: initialState.y, backgroundColor: 'yellow', ...alignCenter }}
-                    >
-                        {inputs.input1.isEditing ? (
-                            <input
-                                type='text'
-                                value={inputs.input1.text}
-                                onChange={(e) => handleChange(e, 'input1')}
-                                onBlur={() => handleBlur('input1')}
-                                autoFocus
-                            />
-                        ) : (
-                            <span onClick={() => handleEditClick('input1')}>{inputs.input1.text}</span>
-                        )}
-                    </div>
-                    <div
-                        style={{
-                            width: Math.abs(width - initialState.x),
-                            height: initialState.y,
-                            backgroundColor: 'pink',
-                            ...alignCenter,
-                        }}
-                    >
-                        {inputs.input2.isEditing ? (
-                            <input
-                                type='text'
-                                value={inputs.input2.text}
-                                onChange={(e) => handleChange(e, 'input2')}
-                                onBlur={() => handleBlur('input2')}
-                                autoFocus
-                            />
-                        ) : (
-                            <span onClick={() => handleEditClick('input2')}>{inputs.input2.text}</span>
-                        )}
-                    </div>
-                </div>
-                <div style={{ display: 'flex' }}>
-                    <div
-                        style={{
-                            width: initialState.x,
-                            height: Math.abs(height - initialState.y),
-                            backgroundColor: 'red',
-                            ...alignCenter,
-                        }}
-                    >
-                        {inputs.input3.isEditing ? (
-                            <input
-                                type='text'
-                                value={inputs.input3.text}
-                                onChange={(e) => handleChange(e, 'input3')}
-                                onBlur={() => handleBlur('input3')}
-                                autoFocus
-                            />
-                        ) : (
-                            <span onClick={() => handleEditClick('input3')}>{inputs.input3.text}</span>
-                        )}
-                    </div>
-                    <div
-                        style={{
-                            width: Math.abs(initialState.x - width),
-                            height: Math.abs(initialState.y - height),
-                            backgroundColor: 'blue',
-                            ...alignCenter,
-                        }}
-                    >
-                        {inputs.input4.isEditing ? (
-                            <input
-                                type='text'
-                                value={inputs.input4.text}
-                                onChange={(e) => handleChange(e, 'input4')}
-                                onBlur={() => handleBlur('input4')}
-                                autoFocus
-                            />
-                        ) : (
-                            <span onClick={() => handleEditClick('input4')}>{inputs.input4.text}</span>
-                        )}
-                    </div>
-                </div>
+            <div>
                 <div
                     style={{
-                        position: 'absolute',
-                        top: '50%',
-                        left: '50%',
-                        transform: 'translate(-50%, -50%)',
+                        width: width,
+                        border: '1px solid black',
+                        height: '50px',
+                        display: 'flex',
+                        borderBottom: 'none',
+                        ...alignCenter,
                     }}
                 >
-                    <Draggable
-                        onDrag={handleDrag}
-                        bounds={{
-                            top: -height / 2,
-                            left: -width / 2,
-                            right: width / 2,
-                            bottom: height / 2,
+                    Actual values
+                </div>
+                <div style={{ width: width, border: '1px solid black', height: '50px', display: 'flex' }}>
+                    <div style={{ width: initialState.x, ...alignCenter, borderRight: '1px solid blue' }}>POSITIVE</div>
+                    <div style={{ flex: 1, ...alignCenter }}>NEGATIVE</div>
+                </div>
+                <div style={{ position: 'relative', width: width, height: height }} ref={myref}>
+                    <div style={{ display: 'flex' }}>
+                        <div
+                            style={{
+                                width: initialState.x,
+                                height: initialState.y,
+                                backgroundColor: 'yellow',
+                                ...alignCenter,
+                            }}
+                        >
+                            {inputs.input1.isEditing ? (
+                                <input
+                                    type='text'
+                                    value={inputs.input1.text}
+                                    onChange={(e) => handleChange(e, 'input1')}
+                                    onBlur={() => handleBlur('input1')}
+                                    autoFocus
+                                />
+                            ) : (
+                                <span onClick={() => handleEditClick('input1')}>{inputs.input1.text}</span>
+                            )}
+                        </div>
+                        <div
+                            style={{
+                                width: Math.abs(width - initialState.x),
+                                height: initialState.y,
+                                backgroundColor: 'pink',
+                                ...alignCenter,
+                            }}
+                        >
+                            {inputs.input2.isEditing ? (
+                                <input
+                                    type='text'
+                                    value={inputs.input2.text}
+                                    onChange={(e) => handleChange(e, 'input2')}
+                                    onBlur={() => handleBlur('input2')}
+                                    autoFocus
+                                />
+                            ) : (
+                                <span onClick={() => handleEditClick('input2')}>{inputs.input2.text}</span>
+                            )}
+                        </div>
+                    </div>
+                    <div style={{ display: 'flex' }}>
+                        <div
+                            style={{
+                                width: initialState.x,
+                                height: Math.abs(height - initialState.y),
+                                backgroundColor: 'red',
+                                ...alignCenter,
+                            }}
+                        >
+                            {inputs.input3.isEditing ? (
+                                <input
+                                    type='text'
+                                    value={inputs.input3.text}
+                                    onChange={(e) => handleChange(e, 'input3')}
+                                    onBlur={() => handleBlur('input3')}
+                                    autoFocus
+                                />
+                            ) : (
+                                <span onClick={() => handleEditClick('input3')}>{inputs.input3.text}</span>
+                            )}
+                        </div>
+                        <div
+                            style={{
+                                width: Math.abs(initialState.x - width),
+                                height: Math.abs(initialState.y - height),
+                                backgroundColor: 'blue',
+                                ...alignCenter,
+                            }}
+                        >
+                            {inputs.input4.isEditing ? (
+                                <input
+                                    type='text'
+                                    value={inputs.input4.text}
+                                    onChange={(e) => handleChange(e, 'input4')}
+                                    onBlur={() => handleBlur('input4')}
+                                    autoFocus
+                                />
+                            ) : (
+                                <span onClick={() => handleEditClick('input4')}>{inputs.input4.text}</span>
+                            )}
+                        </div>
+                    </div>
+
+                    <div
+                        style={{
+                            position: 'absolute',
+                            top: '50%',
+                            left: '50%',
+                            transform: 'translate(-50%, -50%)',
+                        }}
+                    >
+                        <Draggable
+                            onDrag={handleDrag}
+                            bounds={{
+                                top: -height / 2,
+                                left: -width / 2,
+                                right: width / 2,
+                                bottom: height / 2,
+                            }}
+                        >
+                            <div
+                                style={{
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    width: '40px',
+                                    height: '40px',
+                                    ...plusStyle,
+                                }}
+                            >
+                                +
+                            </div>
+                        </Draggable>
+                    </div>
+                    <div
+                        style={{
+                            position: 'absolute',
+                            top: `${height / 2 - 25}px`,
+                            left: `-${height / 2 + 75}px`,
+                            height: '50px',
+                            transform: 'rotate(-90deg)',
+                            width: height,
                         }}
                     >
                         <div
                             style={{
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                width: '40px',
-                                height: '40px',
-                                ...plusStyle,
+                                width: height,
+                                border: '1px solid black',
+                                height: '100%',
+                                borderBottom: 'none',
+                                ...alignCenter,
                             }}
                         >
-                            +
+                            PREDICTED VALUES
                         </div>
-                    </Draggable>
+                        <div style={{ display: 'flex', border: '1px solid black', height: '50px' }}>
+                            <div style={{ ...alignCenter, borderRight: '1px solid blue', flex: 1 }}>NEGATIVE</div>
+                            <div style={{ width: initialState.y, ...alignCenter }}>POSITIVE</div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div
@@ -190,35 +248,28 @@ function Layout({ width, height, inputs, setInputs }) {
                     <span>{inputs.input1.text}</span>
                     <span>
                         {/* height: {initialState.x} width: {initialState.y} */}
-                        BOX SIZE:- {(((initialState.x * initialState.y) / (width * height)) * 100).toFixed(2)}%
+                        BOX SIZE:- {box1Area}%
                     </span>
                 </p>
                 <p style={{ display: 'flex', flexDirection: 'column' }}>
                     <span>{inputs.input2.text}</span>
                     <span>
                         {/* height: {Math.abs(width - initialState.x)} width: {initialState.y} */}
-                        BOX SIZE:-{' '}
-                        {(((Math.abs(width - initialState.x) * initialState.y) / (width * height)) * 100).toFixed(2)}%
+                        BOX SIZE:- {box2Area}%
                     </span>
                 </p>
                 <p style={{ display: 'flex', flexDirection: 'column' }}>
                     <span>{inputs.input3.text}</span>
                     <span>
                         {/* height: {initialState.x} width: {Math.abs(initialState.y - height)} */}
-                        BOX SIZE:-{' '}
-                        {(((initialState.x * Math.abs(initialState.y - height)) / (width * height)) * 100).toFixed(2)}%
+                        BOX SIZE:- {box3Area}%
                     </span>
                 </p>
                 <p style={{ display: 'flex', flexDirection: 'column' }}>
                     <span>{inputs.input4.text}</span>
                     <span>
                         {/* height: {Math.abs(initialState.x - width)} width: {Math.abs(initialState.y - height)} */}
-                        BOX SIZE:-{' '}
-                        {(
-                            ((Math.abs(initialState.x - width) * Math.abs(initialState.y - height)) / (width * height)) *
-                            100
-                        ).toFixed(2)}
-                        %
+                        BOX SIZE:- {box4Area}%
                     </span>
                 </p>
             </div>
