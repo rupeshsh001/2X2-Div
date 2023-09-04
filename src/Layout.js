@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import Draggable from 'react-draggable';
 import './App.css';
 
-function Layout({ width, height, data, inputs, setInputs }) {
+function Layout({ width, height, inputs, setInputs }) {
     const myref = useRef();
     const [maxX, setMaxX] = useState(width);
     const [maxY, setMaxY] = useState(height);
@@ -178,7 +178,7 @@ function Layout({ width, height, data, inputs, setInputs }) {
                 style={{
                     backgroundColor: '#ffffff',
                     borderRadius: '8px',
-                    boxShadow: '10px 10px 10px rgba(0, 0, 0, 0.5)',
+                    boxShadow: '-1px 5px 5px 5px rgba(0, 0, 0, 0.5)',
                     padding: '20px',
                     margin: '20px',
                     display: 'inline-block',
@@ -187,27 +187,38 @@ function Layout({ width, height, data, inputs, setInputs }) {
             >
                 <h4 style={{ marginBottom: '10px' }}>Box details</h4>
                 <p style={{ display: 'flex', flexDirection: 'column' }}>
-                    <span>Cell 1</span>
+                    <span>{inputs.input1.text}</span>
                     <span>
-                        height: {initialState.x} width: {initialState.y}
+                        {/* height: {initialState.x} width: {initialState.y} */}
+                        BOX SIZE:- {(((initialState.x * initialState.y) / (width * height)) * 100).toFixed(2)}%
                     </span>
                 </p>
                 <p style={{ display: 'flex', flexDirection: 'column' }}>
-                    <span>Cell 2</span>
+                    <span>{inputs.input2.text}</span>
                     <span>
-                        height: {Math.abs(width - initialState.x)} width: {initialState.y}
+                        {/* height: {Math.abs(width - initialState.x)} width: {initialState.y} */}
+                        BOX SIZE:-{' '}
+                        {(((Math.abs(width - initialState.x) * initialState.y) / (width * height)) * 100).toFixed(2)}%
                     </span>
                 </p>
                 <p style={{ display: 'flex', flexDirection: 'column' }}>
-                    <span>Cell 3</span>
+                    <span>{inputs.input3.text}</span>
                     <span>
-                        height: {initialState.x} width: {Math.abs(initialState.y - height)}
+                        {/* height: {initialState.x} width: {Math.abs(initialState.y - height)} */}
+                        BOX SIZE:-{' '}
+                        {(((initialState.x * Math.abs(initialState.y - height)) / (width * height)) * 100).toFixed(2)}%
                     </span>
                 </p>
                 <p style={{ display: 'flex', flexDirection: 'column' }}>
-                    <span>Cell 4</span>
+                    <span>{inputs.input4.text}</span>
                     <span>
-                        height: {Math.abs(initialState.x - width)} width: {Math.abs(initialState.y - height)}
+                        {/* height: {Math.abs(initialState.x - width)} width: {Math.abs(initialState.y - height)} */}
+                        BOX SIZE:-{' '}
+                        {(
+                            ((Math.abs(initialState.x - width) * Math.abs(initialState.y - height)) / (width * height)) *
+                            100
+                        ).toFixed(2)}
+                        %
                     </span>
                 </p>
             </div>
