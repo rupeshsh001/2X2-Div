@@ -1,6 +1,6 @@
-import React, { useState, useRef, useEffect } from 'react';
-import Draggable from 'react-draggable';
-import './App.css';
+import React, { useState, useRef, useEffect } from "react";
+import Draggable from "react-draggable";
+import "./App.css";
 
 function Layout({ width, height, inputs, setInputs }) {
     const myref = useRef();
@@ -13,9 +13,9 @@ function Layout({ width, height, inputs, setInputs }) {
     });
 
     const plusStyle = {
-        fontSize: '50px',
-        fontWeight: 'bold',
-        cursor: 'grab',
+        fontSize: "50px",
+        fontWeight: "bold",
+        cursor: "grab",
     };
 
     const handleDrag = (e) => {
@@ -29,9 +29,9 @@ function Layout({ width, height, inputs, setInputs }) {
     };
 
     const alignCenter = {
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
     };
 
     useEffect(() => {
@@ -74,111 +74,120 @@ function Layout({ width, height, inputs, setInputs }) {
                 <div
                     style={{
                         width: width,
-                        border: '1px solid black',
-                        height: '50px',
-                        display: 'flex',
-                        borderBottom: 'none',
+                        border: "1px solid black",
+                        height: "50px",
+                        display: "flex",
+                        borderBottom: "none",
                         ...alignCenter,
                     }}
                 >
                     Actual values
                 </div>
-                <div style={{ width: width, border: '1px solid black', height: '50px', display: 'flex' }}>
-                    <div style={{ width: initialState.x, ...alignCenter, borderRight: '1px solid blue' }}>POSITIVE</div>
-                    <div style={{ flex: 1, ...alignCenter }}>NEGATIVE</div>
+                <div style={{ width: width, border: "1px solid black", height: "50px", display: "flex" }}>
+                    <div
+                        style={{
+                            width: initialState.x,
+                            ...alignCenter,
+                            borderRight: "1px solid black",
+                            backgroundColor: "#FEDA60",
+                        }}
+                    >
+                        POSITIVE
+                    </div>
+                    <div style={{ flex: 1, ...alignCenter, backgroundColor: "#FEDA60" }}>NEGATIVE</div>
                 </div>
-                <div style={{ position: 'relative', width: width, height: height }} ref={myref}>
-                    <div style={{ display: 'flex' }}>
+                <div style={{ position: "relative", width: width, height: height }} ref={myref}>
+                    <div style={{ display: "flex" }}>
                         <div
                             style={{
                                 width: initialState.x,
                                 height: initialState.y,
-                                backgroundColor: 'yellow',
+                                backgroundColor: "#00FF00",
                                 ...alignCenter,
                             }}
                         >
                             {inputs.input1.isEditing ? (
                                 <input
-                                    type='text'
+                                    type="text"
                                     value={inputs.input1.text}
-                                    onChange={(e) => handleChange(e, 'input1')}
-                                    onBlur={() => handleBlur('input1')}
+                                    onChange={(e) => handleChange(e, "input1")}
+                                    onBlur={() => handleBlur("input1")}
                                     autoFocus
                                 />
                             ) : (
-                                <span onClick={() => handleEditClick('input1')}>{inputs.input1.text}</span>
+                                <span onClick={() => handleEditClick("input1")}>{inputs.input1.text}</span>
                             )}
                         </div>
                         <div
                             style={{
                                 width: Math.abs(width - initialState.x),
                                 height: initialState.y,
-                                backgroundColor: 'pink',
+                                backgroundColor: "#0000FF",
                                 ...alignCenter,
                             }}
                         >
                             {inputs.input2.isEditing ? (
                                 <input
-                                    type='text'
+                                    type="text"
                                     value={inputs.input2.text}
-                                    onChange={(e) => handleChange(e, 'input2')}
-                                    onBlur={() => handleBlur('input2')}
+                                    onChange={(e) => handleChange(e, "input2")}
+                                    onBlur={() => handleBlur("input2")}
                                     autoFocus
                                 />
                             ) : (
-                                <span onClick={() => handleEditClick('input2')}>{inputs.input2.text}</span>
+                                <span onClick={() => handleEditClick("input2")}>{inputs.input2.text}</span>
                             )}
                         </div>
                     </div>
-                    <div style={{ display: 'flex' }}>
+                    <div style={{ display: "flex" }}>
                         <div
                             style={{
                                 width: initialState.x,
                                 height: Math.abs(height - initialState.y),
-                                backgroundColor: 'red',
+                                backgroundColor: "#FF0000",
                                 ...alignCenter,
                             }}
                         >
                             {inputs.input3.isEditing ? (
                                 <input
-                                    type='text'
+                                    type="text"
                                     value={inputs.input3.text}
-                                    onChange={(e) => handleChange(e, 'input3')}
-                                    onBlur={() => handleBlur('input3')}
+                                    onChange={(e) => handleChange(e, "input3")}
+                                    onBlur={() => handleBlur("input3")}
                                     autoFocus
                                 />
                             ) : (
-                                <span onClick={() => handleEditClick('input3')}>{inputs.input3.text}</span>
+                                <span onClick={() => handleEditClick("input3")}>{inputs.input3.text}</span>
                             )}
                         </div>
                         <div
                             style={{
                                 width: Math.abs(initialState.x - width),
                                 height: Math.abs(initialState.y - height),
-                                backgroundColor: 'blue',
+                                backgroundColor: "#800000",
                                 ...alignCenter,
                             }}
                         >
                             {inputs.input4.isEditing ? (
                                 <input
-                                    type='text'
+                                    type="text"
                                     value={inputs.input4.text}
-                                    onChange={(e) => handleChange(e, 'input4')}
-                                    onBlur={() => handleBlur('input4')}
+                                    onChange={(e) => handleChange(e, "input4")}
+                                    onBlur={() => handleBlur("input4")}
                                     autoFocus
                                 />
                             ) : (
-                                <span onClick={() => handleEditClick('input4')}>{inputs.input4.text}</span>
+                                <span onClick={() => handleEditClick("input4")}>{inputs.input4.text}</span>
                             )}
                         </div>
                     </div>
 
                     <div
                         style={{
-                            position: 'absolute',
-                            top: '50%',
-                            left: '50%',
-                            transform: 'translate(-50%, -50%)',
+                            position: "absolute",
+                            top: "50%",
+                            left: "50%",
+                            transform: "translate(-50%, -50%)",
                         }}
                     >
                         <Draggable
@@ -192,11 +201,11 @@ function Layout({ width, height, inputs, setInputs }) {
                         >
                             <div
                                 style={{
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    width: '40px',
-                                    height: '40px',
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    width: "40px",
+                                    height: "40px",
                                     ...plusStyle,
                                 }}
                             >
@@ -206,27 +215,43 @@ function Layout({ width, height, inputs, setInputs }) {
                     </div>
                     <div
                         style={{
-                            position: 'absolute',
+                            position: "absolute",
                             top: `${height / 2 - 25}px`,
                             left: `-${height / 2 + 75}px`,
-                            height: '50px',
-                            transform: 'rotate(-90deg)',
+                            height: "50px",
+                            transform: "rotate(-90deg)",
                             width: height,
                         }}
                     >
                         <div
                             style={{
                                 width: height,
-                                border: '1px solid black',
-                                height: '100%',
-                                borderBottom: 'none',
+                                border: "1px solid black",
+                                height: "100%",
+                                borderBottom: "none",
                                 ...alignCenter,
                             }}
                         >
                             PREDICTED VALUES
                         </div>
-                        <div style={{ display: 'flex', border: '1px solid black', height: '50px' }}>
-                            <div style={{ ...alignCenter, borderRight: '1px solid blue', flex: 1 }}>NEGATIVE</div>
+                        <div
+                            style={{
+                                display: "flex",
+                                border: "1px solid black",
+                                height: "50px",
+                                backgroundColor: "#FEDA60",
+                            }}
+                        >
+                            <div
+                                style={{
+                                    ...alignCenter,
+                                    borderRight: "1px solid black",
+                                    flex: 1,
+                                    backgroundColor: "#FEDA60",
+                                }}
+                            >
+                                NEGATIVE
+                            </div>
                             <div style={{ width: initialState.y, ...alignCenter }}>POSITIVE</div>
                         </div>
                     </div>
@@ -234,38 +259,38 @@ function Layout({ width, height, inputs, setInputs }) {
             </div>
             <div
                 style={{
-                    backgroundColor: '#ffffff',
-                    borderRadius: '8px',
-                    boxShadow: '-1px 5px 5px 5px rgba(0, 0, 0, 0.5)',
-                    padding: '20px',
-                    margin: '20px',
-                    display: 'inline-block',
-                    width: '250px',
+                    backgroundColor: "#ffffff",
+                    borderRadius: "8px",
+                    boxShadow: "-1px 5px 5px 5px rgba(0, 0, 0, 0.5)",
+                    padding: "20px",
+                    margin: "20px",
+                    display: "inline-block",
+                    width: "250px",
                 }}
             >
-                <h4 style={{ marginBottom: '10px' }}>Box details</h4>
-                <p style={{ display: 'flex', flexDirection: 'column' }}>
+                <h4 style={{ marginBottom: "10px" }}>Box details</h4>
+                <p style={{ display: "flex", flexDirection: "column" }}>
                     <span>{inputs.input1.text}</span>
                     <span>
                         {/* height: {initialState.x} width: {initialState.y} */}
                         BOX SIZE:- {box1Area}%
                     </span>
                 </p>
-                <p style={{ display: 'flex', flexDirection: 'column' }}>
+                <p style={{ display: "flex", flexDirection: "column" }}>
                     <span>{inputs.input2.text}</span>
                     <span>
                         {/* height: {Math.abs(width - initialState.x)} width: {initialState.y} */}
                         BOX SIZE:- {box2Area}%
                     </span>
                 </p>
-                <p style={{ display: 'flex', flexDirection: 'column' }}>
+                <p style={{ display: "flex", flexDirection: "column" }}>
                     <span>{inputs.input3.text}</span>
                     <span>
                         {/* height: {initialState.x} width: {Math.abs(initialState.y - height)} */}
                         BOX SIZE:- {box3Area}%
                     </span>
                 </p>
-                <p style={{ display: 'flex', flexDirection: 'column' }}>
+                <p style={{ display: "flex", flexDirection: "column" }}>
                     <span>{inputs.input4.text}</span>
                     <span>
                         {/* height: {Math.abs(initialState.x - width)} width: {Math.abs(initialState.y - height)} */}
