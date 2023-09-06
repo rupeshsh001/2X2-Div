@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Layout from "./Layout";
+import Matrix from "./components/Matrix";
 
 const App = () => {
     const [inputs, setInputs] = useState({
@@ -20,7 +20,7 @@ const App = () => {
                 overflow: "hidden",
             }}
         >
-            <Layout width={250} height={250} inputs={inputs} setInputs={setInputs} />
+            <Matrix width={400} height={450} inputs={inputs} setInputs={setInputs} />
         </div>
     );
 };

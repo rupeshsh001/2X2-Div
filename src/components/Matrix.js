@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
 import Draggable from "react-draggable";
-import "./App.css";
+import "./../App.css";
 
-function Layout({ width, height, inputs, setInputs }) {
+const Matrix = ({ width = 500, height = 500, inputs, setInputs }) => {
     const myref = useRef();
     const [maxX, setMaxX] = useState(width);
     const [maxY, setMaxY] = useState(height);
@@ -300,6 +300,6 @@ function Layout({ width, height, inputs, setInputs }) {
             </div>
         </>
     );
-}
+};
 
-export default Layout;
+export default Matrix;
